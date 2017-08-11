@@ -11,7 +11,7 @@ class App extends Component {
     };
   }
   async componentDidMount() {
-    const { data } = await axios.get('http://localhost:3000/hello-world');
+    const { data } = await axios.get('http://localhost:3001/hello-world');
     const { message = '' } = data;
     this.setState(() => ({ message }));
   }
