@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      message: ''
+    };
+  }
+  async componentDidMount() {
+    const { data } = await axios.get('http://localhost:3000/hello-world');
+    const { message = '' } = data;
+    this.setState(() => ({ message }));
+  }
+
   render() {
+    console.log('this.state', this.state);
     return (
       <div className="App">
         <div className="App-header">
@@ -11,7 +25,7 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {this.state.message}
         </p>
       </div>
     );
