@@ -14,8 +14,6 @@ class App extends PureComponent {
               </span>
             </div>
           </div>
-        </div>
-        <div className="container">
           <div className="columns">
             <div className="column is-half is-offset-one-quarter">
               <div className="field">
