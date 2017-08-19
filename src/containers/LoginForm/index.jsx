@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import LoginForm from 'components/LoginForm';
 
-class LoginFormContainer extends Component {
+class LoginFormContainer extends PureComponent {
   constructor() {
     super();
     this.state = {
