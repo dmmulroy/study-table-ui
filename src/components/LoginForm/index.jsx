@@ -43,11 +43,19 @@ class LoginForm extends PureComponent {
             </span>
           </div>
         </div>
-        <div className="field">
+        <div className="field is-grouped">
           <div className="control">
-            <a className="button is-medium is-primary" onClick={handleSubmit}>
+            <button
+              className="button is-medium is-primary"
+              onClick={handleSubmit}
+            >
               Login
-            </a>
+            </button>
+          </div>
+          <div className="control">
+            <button className="button is-medium is-link" onClick={() => {}}>
+              Sign up
+            </button>
           </div>
         </div>
       </div>
