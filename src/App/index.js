@@ -8,6 +8,7 @@ class App extends PureComponent {
     super();
     this.state = {
       authenticated: false,
+      signUp: false,
       user: {
         email: '',
         password: '',
@@ -15,6 +16,10 @@ class App extends PureComponent {
       }
     };
   }
+
+  toggleSignUp = () => {
+    this.setState(({ signUp }) => ({ signUp: !signUp }));
+}
 
   submitLogIn = async (email, password) => {
     const { data } = await axios({
@@ -35,7 +40,7 @@ class App extends PureComponent {
   };
 
   render() {
-    return <Login {...this.state} submit={this.submitLogIn} />;
+    return <Login {...this.state} submit={this.submitLogIn} toggleSignUp={this.toggleSignUp }/>;
   }
 }
 

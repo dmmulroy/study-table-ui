@@ -7,8 +7,8 @@ class LoginFormContainer extends PureComponent {
   constructor() {
     super();
     this.state = {
-      email: '',
-      password: ''
+      email: 'dillon.mulroy@gmail.com',
+      password: 'test'
     };
   }
 

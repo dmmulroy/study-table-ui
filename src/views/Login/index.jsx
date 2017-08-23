@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from 'containers/LoginForm';
+import SignUpForm from 'containers/SignUpForm';
 
 const LoginView = props =>
   <section className="section">
@@ -15,26 +16,9 @@ const LoginView = props =>
       </div>
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">
-          {props.authenticated
-            ? <h1 className="title">
-                Successfully Logged In
-                <p>
-                  <strong>
-                    email: {props.user.email}
-                  </strong>
-                </p>
-                <p>
-                  <strong>
-                    password: {props.user.password}
-                  </strong>
-                </p>
-                <p>
-                  <strong>
-                    token: {props.user.token}
-                  </strong>
-                </p>
-              </h1>
-            : <LoginForm submit={props.submit} />}
+          {props.signUp
+            ? <SignUpForm toggleSignUp={props.toggleSignUp} />
+            : <LoginForm submit={props.submit} toggleSignUp={props.toggleSignUp} />}
         </div>
       </div>
     </div>

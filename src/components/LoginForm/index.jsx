@@ -10,7 +10,7 @@ class LoginForm extends PureComponent {
   }
 
   render() {
-    const { email, password, handleSubmit } = this.props;
+    const { email, password, handleSubmit, toggleSignUp } = this.props;
     return (
       <div>
         <div className="field">
@@ -53,7 +53,7 @@ class LoginForm extends PureComponent {
             </button>
           </div>
           <div className="control">
-            <button className="button is-medium is-link" onClick={() => {}}>
+            <button className="button is-medium is-link" onClick={toggleSignUp}>
               Sign up
             </button>
           </div>
