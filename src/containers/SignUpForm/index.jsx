@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
-import axios from 'axios';
+import React, { PureComponent } from "react";
+import axios from "axios";
 
-import SignUpForm from 'components/SignUpForm';
+import SignUpForm from "components/SignUpForm";
 
 class SignUpFormContainer extends PureComponent {
   constructor() {
     super();
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: ""
     };
   }
 
@@ -19,21 +19,21 @@ class SignUpFormContainer extends PureComponent {
     this.setState(() => ({
       [name]: value
     }));
-  }
+  };
 
   handleSubmit = () => {
     const { toggleSignUp } = this.props;
 
     axios({
-      method: 'post',
-      url: 'http://localhost:3001/api/user',
+      method: "post",
+      url: "http://localhost:3001/auth/sign-up",
       data: {
         ...this.state
       }
     });
 
     toggleSignUp();
-  }
+  };
 
   render() {
     return (

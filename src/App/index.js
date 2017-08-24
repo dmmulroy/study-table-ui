@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import axios from 'axios';
+import React, { PureComponent } from "react";
+import axios from "axios";
 
-import Login from 'views/Login';
+import Login from "views/Login";
 
 class App extends PureComponent {
   constructor() {
@@ -10,21 +10,21 @@ class App extends PureComponent {
       authenticated: false,
       signUp: false,
       user: {
-        email: '',
-        password: '',
-        token: ''
+        email: "",
+        password: "",
+        token: ""
       }
     };
   }
 
   toggleSignUp = () => {
     this.setState(({ signUp }) => ({ signUp: !signUp }));
-}
+  };
 
   submitLogIn = async (email, password) => {
     const { data } = await axios({
-      method: 'post',
-      url: 'http://localhost:3001/auth/login',
+      method: "post",
+      url: "http://localhost:3001/auth/login",
       data: {
         email,
         password
@@ -33,6 +33,14 @@ class App extends PureComponent {
 
     const { token } = data;
 
+    axios({
+      method: "get",
+      url: "http://localhost:3001/api/users",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(({ data }) => console.log(JSON.stringify(data)));
+
     this.setState(() => ({
       user: { email, password, token },
       authenticated: true
@@ -40,7 +48,13 @@ class App extends PureComponent {
   };
 
   render() {
-    return <Login {...this.state} submit={this.submitLogIn} toggleSignUp={this.toggleSignUp }/>;
+    return (
+      <Login
+        {...this.state}
+        submit={this.submitLogIn}
+        toggleSignUp={this.toggleSignUp}
+      />
+    );
   }
 }
 
