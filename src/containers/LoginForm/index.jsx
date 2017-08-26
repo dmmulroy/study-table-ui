@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react';
-import { Route } from 'react-router-dom';
+import React, { PureComponent } from "react";
+import { Route } from "react-router-dom";
 
-import LoginForm from 'components/LoginForm';
+import LoginForm from "components/LoginForm";
 
 class LoginFormContainer extends PureComponent {
   constructor() {
     super();
     this.state = {
-      email: 'dillon.mulroy@gmail.com',
-      password: 'test'
+      email: "",
+      password: ""
     };
   }
 
