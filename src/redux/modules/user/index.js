@@ -1,34 +1,43 @@
 const axios = require('axios');
 
 // Actions
-const SIGN_UP = 'study-table/user/SIGN_UP';
-const SIGN_UP_SUCCESS = 'study-table/user/SIGN_UP_SUCCESS';
-const SIGN_UP_FAILURE = 'study-table/user/SIGN_UP_FAILURE';
+const LOG_IN = 'study-table/user/LOG_IN';
+const LOG_IN_SUCCESS = 'study-table/user/LOG_IN_SUCCESS';
+const LOG_IN_FAILURE = 'study-table/user/LOG_IN_FAILURE';
 
 // Reducer
-export default (state = {}, action = {}) => {
+export default (state = { isFetching: false, data: null }, action = {}) => {
   switch (action.type) {
-    case SIGN_UP_SUCCESS:
-      return Object.assign({}, state, action.user);
-    case SIGN_UP_FAILURE:
-    case SIGN_UP:
+    case LOG_IN:
+      return Object.assign({}, state, { isFetching: true });
+    case LOG_IN_SUCCESS:
+      return Object.assign({}, state, {
+        data: { ...action.user },
+        isFetching: false
+      });
+    case LOG_IN_FAILURE:
+      return Object.assign({}, state, { isFetching: false });
     default:
       return state;
   }
 };
 
 // Action Creators
-export const signUp = userData => async dispatch => {
+export const login = (email, password) => async dispatch => {
   try {
-    const { data } = axios({
+    dispatch({ type: LOG_IN });
+    const { data } = await axios({
       method: 'post',
-      url: 'localhost:3001/auth/sign-up',
-      data: { ...userData }
+      url: 'http://localhost:3001/auth/login',
+      data: { email, password }
     });
 
-    const { token } = data;
-    dispatch(SIGN_UP_SUCCESS, Object.assign({}, userData, { token }));
+    const { token, user } = data;
+
+    localStorage.setItem('token', token);
+
+    dispatch({ type: LOG_IN_SUCCESS, user });
   } catch (err) {
-    dispatch(SIGN_UP_FAILURE);
+    dispatch({ type: LOG_IN_FAILURE });
   }
 };

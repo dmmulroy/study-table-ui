@@ -1,4 +1,6 @@
 import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+
 import LoginForm from 'containers/LoginForm';
 import SignUpForm from 'containers/SignUpForm';
 
@@ -16,9 +18,10 @@ const LoginView = props =>
       </div>
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">
-          {props.signUp
-            ? <SignUpForm toggleSignUp={props.toggleSignUp} />
-            : <LoginForm submit={props.submit} toggleSignUp={props.toggleSignUp} />}
+          <Switch>
+            <Route exact path="/" component={LoginForm} />
+            <Route path="/sign-up" component={SignUpForm} />
+          </Switch>
         </div>
       </div>
     </div>

@@ -1,45 +1,46 @@
-import React, { PureComponent } from "react";
-import axios from "axios";
+import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
-import SignUpForm from "components/SignUpForm";
+import SignUpForm from 'components/SignUpForm';
 
 class SignUpFormContainer extends PureComponent {
   constructor() {
     super();
     this.state = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: ""
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      isFetching: false
     };
   }
 
   handleOnChange = event => {
     const { name, value } = event.target;
-    this.setState(() => ({
-      [name]: value
-    }));
+    this.setState(() => ({ [name]: value }));
   };
 
-  handleSubmit = () => {
-    const { toggleSignUp } = this.props;
+  handleSubmit = async () => {
+    const { history } = this.props;
 
-    axios({
-      method: "post",
-      url: "http://localhost:3001/auth/sign-up",
+    this.setState(() => ({ isFetching: true }));
+
+    const { status } = await axios({
+      method: 'post',
+      url: 'http://localhost:3001/auth/sign-up',
       data: {
         ...this.state
       }
     });
 
-    toggleSignUp();
+    if (status === 200) history.push('/');
   };
 
   render() {
     return (
       <SignUpForm
         {...this.state}
-        {...this.props}
         handleOnChange={this.handleOnChange}
         handleSubmit={this.handleSubmit}
       />
@@ -47,4 +48,4 @@ class SignUpFormContainer extends PureComponent {
   }
 }
 
-export default SignUpFormContainer;
+export default withRouter(SignUpFormContainer);
