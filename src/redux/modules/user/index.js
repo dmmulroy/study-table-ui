@@ -6,13 +6,20 @@ const LOG_IN_SUCCESS = 'study-table/user/LOG_IN_SUCCESS';
 const LOG_IN_FAILURE = 'study-table/user/LOG_IN_FAILURE';
 
 // Reducer
-export default (state = { isFetching: false, data: null }, action = {}) => {
+const initialState = {
+  data: null,
+  isAuthenticated: false,
+  isFetching: false
+};
+
+export default (state = initialState, action = {}) => {
   switch (action.type) {
     case LOG_IN:
       return Object.assign({}, state, { isFetching: true });
     case LOG_IN_SUCCESS:
       return Object.assign({}, state, {
         data: { ...action.user },
+        isAuthenticated: true,
         isFetching: false
       });
     case LOG_IN_FAILURE:
