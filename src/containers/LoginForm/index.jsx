@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import LoginForm from 'components/LoginForm';
 import { login } from 'redux/modules/user';
@@ -18,10 +19,11 @@ class LoginFormContainer extends Component {
     this.setState(() => ({ [name]: value }));
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { email, password } = this.state;
-    const { login } = this.props;
-    login(email, password);
+    const { login, history } = this.props;
+    await login(email, password);
+    history.push('/');
   };
 
   render() {
@@ -42,6 +44,8 @@ const mapStateToProps = ({ user }) => ({
   isFetching: user.isFetching
 });
 
-export default connect(mapStateToProps, {
-  login
-})(LoginFormContainer);
+export default withRouter(
+  connect(mapStateToProps, {
+    login
+  })(LoginFormContainer)
+);
