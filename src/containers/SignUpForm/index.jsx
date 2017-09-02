@@ -4,7 +4,12 @@ import validator from 'validator';
 import axios from 'axios';
 
 import SignUpForm from 'components/SignUpForm';
-import capitalize from 'utils/capitalize';
+
+const labelMap = {
+  firstName: 'First name',
+  lastName: 'Last name',
+  email: 'Email'
+};
 
 class SignUpFormContainer extends Component {
   state = {
@@ -20,22 +25,40 @@ class SignUpFormContainer extends Component {
     switch (name) {
       case 'email': {
         if (validator.isEmpty(value)) return 'Email may not be empty';
+
         return validator.isEmail(value) ? '' : 'Invalid email address';
       }
       case 'password': {
         const { confirmPassword } = this.state;
-        if (validator.isEmpty(value)) return 'Password may not be empty';
-        return confirmPassword === value ? '' : "Passwords don't match";
+
+        if (validator.isEmpty(value)) {
+          return 'Password may not be empty';
+        } else if (
+          !validator.isEmpty(confirmPassword.value) &&
+          confirmPassword.value !== value
+        ) {
+          return "Passwords dont' match";
+        } else {
+          return '';
+        }
       }
       case 'confirmPassword': {
         const { password } = this.state;
-        if (validator.isEmpty(value))
+
+        if (validator.isEmpty(value)) {
           return 'Password confirmation may not be empty';
-        return password === value ? '' : "Passwords don't match";
+        } else if (
+          !validator.isEmpty(password.value) &&
+          password.value !== value
+        ) {
+          return "Passwords don't match";
+        } else {
+          return '';
+        }
       }
       default:
         return validator.isEmpty(value)
-          ? `${capitalize(name)} may not be empty`
+          ? `${labelMap[name]} may not be empty`
           : '';
     }
   };
