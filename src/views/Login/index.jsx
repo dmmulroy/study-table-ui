@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import LoginForm from 'containers/LoginForm';
 import SignUpForm from 'containers/SignUpForm';
 
-const LoginView = props =>
+const LoginView = props => (
   <section className="section">
     <div className="container">
       <div className="columns">
@@ -25,6 +25,7 @@ const LoginView = props =>
         </div>
       </div>
     </div>
-  </section>;
+  </section>
+);
 
 export default LoginView;

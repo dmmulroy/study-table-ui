@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import LoginForm from 'components/LoginForm';
 import { login } from 'redux/modules/user';
 
-class LoginFormContainer extends PureComponent {
+class LoginFormContainer extends Component {
   constructor() {
     super();
     this.state = {
