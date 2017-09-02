@@ -63,10 +63,39 @@ class SignUpFormContainer extends Component {
     }
   };
 
+  _revalidatePasswordFields = () => {
+    const { password, confirmPassword } = this.state;
+
+    if (
+      validator.isEmpty(password.value) ||
+      validator.isEmpty(confirmPassword.value)
+    )
+      return;
+
+    if (password.value === confirmPassword.value) {
+      this.setState(() => ({
+        password: {
+          ...password,
+          error: ''
+        },
+        confirmPassword: {
+          ...confirmPassword,
+          error: ''
+        }
+      }));
+    }
+  };
+
   handleOnChange = event => {
     const { name, value } = event.target;
     const error = this._validateField(name, validator.trim(value));
-    this.setState(() => ({ [name]: { value, error } }));
+    this.setState(
+      () => ({ [name]: { value, error } }),
+      () => {
+        if (name === 'password' || name === 'confirmPassword')
+          this._revalidatePasswordFields();
+      }
+    );
   };
 
   handleSubmit = async () => {
