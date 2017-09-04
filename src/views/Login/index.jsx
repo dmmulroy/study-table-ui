@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import LoginForm from 'containers/LoginForm';
 import SignUpForm from 'containers/SignUpForm';
@@ -19,6 +20,7 @@ const LoginView = props => (
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">
           <Switch>
+            {props.isAuthenticated && <Redirect to="/" />}
             <Route path="/login" component={LoginForm} />
             <Route path="/sign-up" component={SignUpForm} />
           </Switch>
@@ -28,4 +30,8 @@ const LoginView = props => (
   </section>
 );
 
-export default LoginView;
+const mapStateToProps = ({ user }) => ({
+  isAuthenticated: user.isAuthenticated
+});
+
+export default connect(mapStateToProps)(LoginView);

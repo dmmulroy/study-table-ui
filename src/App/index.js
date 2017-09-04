@@ -13,18 +13,14 @@ class App extends Component {
   }
 
   render() {
-    const { props } = this;
+    const { isAuthenticated } = this.props;
     return (
       <Switch>
         <Route
           exact
           path="/"
           render={() =>
-            props.isAuthenticated ? (
-              <h1>Dashboard</h1>
-            ) : (
-              <Redirect to="/login" />
-            )}
+            isAuthenticated ? <h1>Dashboard</h1> : <Redirect to="/login" />}
         />
         <Route path="/login" component={Login} />
         <Route path="/sign-up" component={Login} />
