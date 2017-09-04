@@ -9,6 +9,8 @@ const SignUpForm = ({
   email,
   password,
   confirmPassword,
+  submitted,
+  isValid,
   isFetching,
   handleOnChange,
   handleOnBlur,
@@ -90,6 +92,14 @@ const SignUpForm = ({
         </InputWithErrors>
       </div>
     </div>
+    {submitted &&
+    !isValid && (
+      <div style={{ margin: 5 }}>
+        <p className="help is-danger">
+          Please complete the form and submit again
+        </p>
+      </div>
+    )}
     <div className="field is-grouped">
       <div className="control">
         <button className="button is-medium is-primary" onClick={handleSubmit}>

@@ -18,7 +18,32 @@ class SignUpFormContainer extends Component {
     email: { value: '', error: '' },
     password: { value: '', error: '' },
     confirmPassword: { value: '', error: '' },
+    submitted: false,
+    isValid: false,
     isFetching: false
+  };
+
+  _formIsValid = () => {
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword
+    } = this.state;
+
+    const isValid = [
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword
+    ].every(
+      ({ value, error }) =>
+        !validator.isEmpty(value) && validator.isEmpty(error)
+    );
+
+    return isValid;
   };
 
   _validateField = (name, value) => {
@@ -100,6 +125,16 @@ class SignUpFormContainer extends Component {
 
   handleSubmit = async () => {
     try {
+      const isValid = this._formIsValid();
+
+      if (!isValid) {
+        this.setState(() => ({
+          submitted: true,
+          isValid
+        }));
+        return;
+      }
+
       const { history } = this.props;
 
       this.setState(() => ({ isFetching: true }));
@@ -108,7 +143,10 @@ class SignUpFormContainer extends Component {
         method: 'post',
         url: 'http://localhost:3001/auth/sign-up',
         data: {
-          ...this.state
+          firstName: this.state.firstName.value,
+          lastName: this.state.lastName.value,
+          email: this.state.email.value,
+          password: this.state.password.value
         }
       });
 
