@@ -99,19 +99,23 @@ class SignUpFormContainer extends Component {
   };
 
   handleSubmit = async () => {
-    const { history } = this.props;
+    try {
+      const { history } = this.props;
 
-    this.setState(() => ({ isFetching: true }));
+      this.setState(() => ({ isFetching: true }));
 
-    const { status } = await axios({
-      method: 'post',
-      url: 'http://localhost:3001/auth/sign-up',
-      data: {
-        ...this.state
-      }
-    });
+      const { status } = await axios({
+        method: 'post',
+        url: 'http://localhost:3001/auth/sign-up',
+        data: {
+          ...this.state
+        }
+      });
 
-    if (status === 200) history.push('/');
+      if (status === 200) history.push('/');
+    } catch (err) {
+      console.log('err', err);
+    }
   };
 
   render() {
