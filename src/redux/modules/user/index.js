@@ -12,6 +12,7 @@ const LOG_IN_FAILURE = 'study-table/user/LOG_IN_FAILURE';
 // Reducer
 const initialState = {
   data: null,
+  isInitializing: true,
   isAuthenticated: false,
   isFetching: false
 };
@@ -23,11 +24,15 @@ export default (state = initialState, action = {}) => {
     case LOG_IN_SUCCESS:
       return Object.assign({}, state, {
         data: { ...action.user },
+        isInitializing: false,
         isAuthenticated: true,
         isFetching: false
       });
     case LOG_IN_FAILURE:
-      return Object.assign({}, state, { isFetching: false });
+      return Object.assign({}, state, {
+        isFetching: false,
+        isInitializing: false
+      });
     default:
       return state;
   }
@@ -55,7 +60,6 @@ export const login = (email, password) => async dispatch => {
 
 export const retrieveAuthenticatedUser = () => async dispatch => {
   try {
-    console.log('here yo');
     dispatch({ type: LOG_IN });
 
     const token = localStorage.getItem('token');
