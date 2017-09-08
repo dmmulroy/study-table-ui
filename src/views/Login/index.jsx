@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import LoginForm from 'containers/LoginForm';
 import SignUpForm from 'containers/SignUpForm';
 
 const LoginView = props => (
   <section className="section">
+    {props.isAuthenticated && <Redirect to="/" />}
     <div className="container">
       <div className="columns">
         <div className="column is-half is-offset-one-quarter has-text-centered">
@@ -20,9 +21,12 @@ const LoginView = props => (
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">
           <Switch>
-            {props.isAuthenticated && <Redirect to="/" />}
-            <Route path="/login" component={LoginForm} />
-            <Route path="/sign-up" component={SignUpForm} />
+            <Route path={`${props.match.path}/login`} component={LoginForm} />
+            <Route
+              path={`${props.match.path}/sign-up`}
+              component={SignUpForm}
+            />
+            <Redirect to={`${props.match.path}/login`} />
           </Switch>
         </div>
       </div>
@@ -34,4 +38,4 @@ const mapStateToProps = ({ user }) => ({
   isAuthenticated: user.isAuthenticated
 });
 
-export default connect(mapStateToProps)(LoginView);
+export default withRouter(connect(mapStateToProps)(LoginView));

@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   render() {
-    const { isInitializing, isAuthenticated, isFetching } = this.props;
+    const { isInitializing, isAuthenticated } = this.props;
 
     return (
       <Switch>
@@ -25,12 +25,11 @@ class App extends Component {
             return isAuthenticated ? (
               <div>Dashboard</div>
             ) : (
-              <Redirect to="/login" />
+              <Redirect to="/auth/login" />
             );
           }}
         />
-        <Route path="/login" component={Login} />
-        <Route path="/sign-up" component={Login} />
+        <Route path="/auth" component={Login} />
       </Switch>
     );
   }
@@ -38,7 +37,6 @@ class App extends Component {
 
 const mapStateToProps = ({ user }) => ({
   isInitializing: user.isInitializing,
-  isFetching: user.isFetching,
   isAuthenticated: user.isAuthenticated
 });
 
