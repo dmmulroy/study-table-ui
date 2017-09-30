@@ -7,7 +7,9 @@ import SignUpForm from 'containers/SignUpForm';
 
 const LoginView = props => (
   <section className="section">
-    {props.isAuthenticated && <Redirect to="/" />}
+    {(props.isAuthenticated || !props.firstFetchPerformed) && (
+      <Redirect to="/" />
+    )}
     <div className="container">
       <div className="columns">
         <div className="column is-half is-offset-one-quarter has-text-centered">
@@ -35,7 +37,8 @@ const LoginView = props => (
 );
 
 const mapStateToProps = ({ user }) => ({
-  isAuthenticated: user.isAuthenticated
+  isAuthenticated: user.isAuthenticated,
+  firstFetchPerformed: user.firstFetchPerformed
 });
 
 export default withRouter(connect(mapStateToProps)(LoginView));
