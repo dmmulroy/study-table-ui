@@ -12,9 +12,9 @@ const LOG_IN_FAILURE = 'study-table/user/LOG_IN_FAILURE';
 // Reducer
 const initialState = {
   data: null,
-  isInitializing: true,
   isAuthenticated: false,
-  isFetching: false
+  isFetching: false,
+  firstFetchPerformed: false
 };
 
 export default (state = initialState, action = {}) => {
@@ -23,15 +23,15 @@ export default (state = initialState, action = {}) => {
       return Object.assign({}, state, { isFetching: true });
     case LOG_IN_SUCCESS:
       return Object.assign({}, state, {
-        data: { ...action.user },
-        isInitializing: false,
+        ...action.payload,
         isAuthenticated: true,
         isFetching: false
       });
     case LOG_IN_FAILURE:
       return Object.assign({}, state, {
-        isFetching: false,
-        isInitializing: false
+        test: 'yo',
+        ...action.payload,
+        isFetching: false
       });
     default:
       return state;
@@ -52,7 +52,7 @@ export const login = (email, password) => async dispatch => {
 
     localStorage.setItem('token', token);
 
-    dispatch({ type: LOG_IN_SUCCESS, user });
+    dispatch({ type: LOG_IN_SUCCESS, payload: { data: { user } } });
   } catch (err) {
     dispatch({ type: LOG_IN_FAILURE });
   }
@@ -65,7 +65,10 @@ export const retrieveAuthenticatedUser = () => async dispatch => {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      dispatch({ type: LOG_IN_FAILURE });
+      dispatch({
+        type: LOG_IN_FAILURE,
+        payload: { firstFetchPerformed: true }
+      });
       return;
     }
 
@@ -76,8 +79,14 @@ export const retrieveAuthenticatedUser = () => async dispatch => {
     });
 
     const { user } = data;
-    dispatch({ type: LOG_IN_SUCCESS, user });
+    dispatch({
+      type: LOG_IN_SUCCESS,
+      payload: {
+        data: { ...user },
+        firstFetchPerformed: true
+      }
+    });
   } catch (err) {
-    dispatch({ type: LOG_IN_FAILURE });
+    dispatch({ type: LOG_IN_FAILURE, payload: { firstFetchPerformed: true } });
   }
 };

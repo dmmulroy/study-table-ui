@@ -7,7 +7,7 @@ const LoginForm = ({
   handleOnChange,
   handleSubmit,
   isFetching
-}) =>
+}) => (
   <div>
     <div className="field">
       <label className="label">Email</label>
@@ -53,11 +53,12 @@ const LoginForm = ({
         </button>
       </div>
       <div className="control">
-        <Link to="/sign-up" replace>
+        <Link to="auth/sign-up" replace>
           <button className="button is-medium is-link">Sign up</button>
         </Link>
       </div>
     </div>
-  </div>;
+  </div>
+);
 
 export default LoginForm;

@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   render() {
-    const { isInitializing, isAuthenticated } = this.props;
+    const { isFetching, isAuthenticated, firstFetchPerformed } = this.props;
 
     return (
       <Switch>
@@ -21,7 +21,8 @@ class App extends Component {
           exact
           path="/"
           render={() => {
-            if (isInitializing) return <div>Loading...</div>;
+            if (isFetching || !firstFetchPerformed)
+              return <div>Loading...</div>;
             return isAuthenticated ? (
               <div>Dashboard</div>
             ) : (
@@ -36,8 +37,9 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ user }) => ({
-  isInitializing: user.isInitializing,
-  isAuthenticated: user.isAuthenticated
+  isFetching: user.isFetching,
+  isAuthenticated: user.isAuthenticated,
+  firstFetchPerformed: user.firstFetchPerformed
 });
 
 export default withRouter(
