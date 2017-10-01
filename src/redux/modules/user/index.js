@@ -29,7 +29,6 @@ export default (state = initialState, action = {}) => {
       });
     case LOG_IN_FAILURE:
       return Object.assign({}, state, {
-        test: 'yo',
         ...action.payload,
         isFetching: false
       });
@@ -69,8 +68,7 @@ export const retrieveAuthenticatedUser = () => async dispatch => {
         () =>
           dispatch({
             type: LOG_IN_FAILURE,
-            payload: { firstFetchPerformed: true },
-            test: 'wtf'
+            payload: { firstFetchPerformed: true }
           }),
         3000
       );
