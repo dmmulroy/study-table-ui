@@ -23,7 +23,11 @@ const LoginView = props =>
         <div className="columns">
           <div className="column is-half is-offset-one-quarter">
             <Switch>
-              <Route path={`${props.match.path}/login`} component={LoginForm} />
+              <Route
+                path={`${props.match.path}/login`}
+                component={LoginForm}
+                exact
+              />
               <Route
                 path={`${props.match.path}/sign-up`}
                 component={SignUpForm}

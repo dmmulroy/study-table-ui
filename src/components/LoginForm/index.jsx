@@ -53,7 +53,7 @@ const LoginForm = ({
         </button>
       </div>
       <div className="control">
-        <Link to="auth/sign-up" replace>
+        <Link to="/auth/sign-up">
           <button className="button is-medium is-link">Sign up</button>
         </Link>
       </div>
