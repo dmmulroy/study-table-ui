@@ -5,7 +5,8 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { retrieveAuthenticatedUser } from 'redux/modules/user';
 import Initializing from 'views/Initializing';
 import Login from 'views/Login';
-import Authenticated from 'views/Authenticated';
+import Dashboard from 'views/Dashboard';
+import OrganizationManagement from 'views/OrganizationManagement';
 
 class App extends Component {
   componentDidMount() {
@@ -14,23 +15,24 @@ class App extends Component {
     retrieveAuthenticatedUser();
   }
 
-  render() {
-    const { isFetching, isAuthenticated, firstFetchPerformed } = this.props;
+  renderIndex = () => {
+    const { user = {} } = this.props;
+    const { isAuthenticated, defaultOrganizationId } = user;
 
-    return (
+    if (!isAuthenticated) return <Redirect to="/auth/login" />;
+
+    return defaultOrganizationId ? <Dashboard /> : <OrganizationManagement />;
+  };
+
+  render() {
+    const { user } = this.props;
+    const { isFetching, firstFetchPerformed } = user;
+
+    return isFetching || !firstFetchPerformed ? (
+      <Initializing />
+    ) : (
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => {
-            if (isFetching || !firstFetchPerformed) return <Initializing />;
-            return isAuthenticated ? (
-              <Authenticated />
-            ) : (
-              <Redirect to="/auth/login" />
-            );
-          }}
-        />
+        <Route exact path="/" render={this.renderIndex} />
         <Route path="/auth" component={Login} />
       </Switch>
     );
@@ -38,9 +40,7 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ user }) => ({
-  isFetching: user.isFetching,
-  isAuthenticated: user.isAuthenticated,
-  firstFetchPerformed: user.firstFetchPerformed
+  user
 });
 
 export default withRouter(
