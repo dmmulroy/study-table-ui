@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import InputWithErrors from 'components/InputWithErrors';
@@ -93,13 +94,13 @@ const SignUpForm = ({
       </div>
     </div>
     {submitted &&
-    !isValid && (
-      <div style={{ margin: 5 }}>
-        <p className="help is-danger">
-          Please complete the form and submit again
-        </p>
-      </div>
-    )}
+      !isValid && (
+        <div style={{ margin: 5 }}>
+          <p className="help is-danger">
+            Please complete the form and submit again
+          </p>
+        </div>
+      )}
     <div className="field is-grouped">
       <div className="control">
         <button className="button is-medium is-primary" onClick={handleSubmit}>
@@ -114,5 +115,19 @@ const SignUpForm = ({
     </div>
   </div>
 );
+
+SignUpForm.propType = {
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  confirmPassword: PropTypes.string.isRequired,
+  submitted: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  handleOnChange: PropTypes.func.isRequired,
+  handleOnBlur: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
+};
 
 export default SignUpForm;

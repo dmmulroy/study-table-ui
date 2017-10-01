@@ -11,7 +11,7 @@ const LOG_IN_FAILURE = 'study-table/user/LOG_IN_FAILURE';
 
 // Reducer
 const initialState = {
-  data: null,
+  data: {},
   isAuthenticated: false,
   isFetching: false,
   firstFetchPerformed: false
