@@ -5,6 +5,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { retrieveAuthenticatedUser } from 'redux/modules/user';
 import Initializing from 'views/Initializing';
 import Login from 'views/Login';
+import Authenticated from 'views/Authenticated';
 
 class App extends Component {
   componentDidMount() {
@@ -24,7 +25,7 @@ class App extends Component {
           render={() => {
             if (isFetching || !firstFetchPerformed) return <Initializing />;
             return isAuthenticated ? (
-              <div>Dashboard</div>
+              <Authenticated />
             ) : (
               <Redirect to="/auth/login" />
             );

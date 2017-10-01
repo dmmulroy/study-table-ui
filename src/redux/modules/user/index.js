@@ -64,14 +64,10 @@ export const retrieveAuthenticatedUser = () => async dispatch => {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      return setTimeout(
-        () =>
-          dispatch({
-            type: LOG_IN_FAILURE,
-            payload: { firstFetchPerformed: true }
-          }),
-        3000
-      );
+      return dispatch({
+        type: LOG_IN_FAILURE,
+        payload: { firstFetchPerformed: true }
+      });
     }
 
     const { data } = await axios({
@@ -81,17 +77,14 @@ export const retrieveAuthenticatedUser = () => async dispatch => {
     });
 
     const { user } = data;
-    setTimeout(
-      () =>
-        dispatch({
-          type: LOG_IN_SUCCESS,
-          payload: {
-            data: { ...user },
-            firstFetchPerformed: true
-          }
-        }),
-      3000
-    );
+
+    dispatch({
+      type: LOG_IN_SUCCESS,
+      payload: {
+        data: { ...user },
+        firstFetchPerformed: true
+      }
+    });
   } catch (err) {
     dispatch({ type: LOG_IN_FAILURE, payload: { firstFetchPerformed: true } });
   }

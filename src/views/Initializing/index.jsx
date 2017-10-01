@@ -2,7 +2,7 @@ import React from 'react';
 
 import Spinner from 'components/Spinner';
 
-const Initializing = () => (
+const InitializingView = () => (
   <div
     style={{
       display: 'flex',
@@ -15,4 +15,4 @@ const Initializing = () => (
   </div>
 );
 
-export default Initializing;
+export default InitializingView;
