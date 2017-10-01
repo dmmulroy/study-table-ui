@@ -15,25 +15,33 @@ class App extends Component {
     retrieveAuthenticatedUser();
   }
 
-  renderIndex = () => {
+  indexRedirect = () => {
     const { user = {} } = this.props;
     const { isAuthenticated, defaultOrganizationId } = user;
 
     if (!isAuthenticated) return <Redirect to="/auth/login" />;
 
-    return defaultOrganizationId ? <Dashboard /> : <OrganizationManagement />;
+    return defaultOrganizationId ? (
+      <Redirect to={`/dashboard/${defaultOrganizationId}`} />
+    ) : (
+      <Redirect to="organizations" />
+    );
   };
 
   render() {
     const { user } = this.props;
-    const { isFetching, firstFetchPerformed } = user;
+    const { isAuthenticated, isFetching, firstFetchPerformed } = user;
+    const inititalizing = isFetching || !firstFetchPerformed;
 
-    return isFetching || !firstFetchPerformed ? (
+    return inititalizing ? (
       <Initializing />
     ) : (
       <Switch>
-        <Route exact path="/" render={this.renderIndex} />
+        <Route exact path="/" render={this.indexRedirect} />
         <Route path="/auth" component={Login} />
+        {!isAuthenticated && <Redirect to="/auth/login" />}
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/organizations" component={OrganizationManagement} />
       </Switch>
     );
   }
