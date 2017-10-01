@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Dashboard from 'views/Dashboard';
 import TeamManagement from 'views/TeamManagement';
