@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const LoginForm = ({
@@ -60,5 +61,13 @@ const LoginForm = ({
     </div>
   </div>
 );
+
+LoginForm.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  handleOnChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired
+};
 
 export default LoginForm;

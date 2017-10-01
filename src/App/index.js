@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { retrieveAuthenticatedUser } from 'redux/modules/user';
 import Initializing from 'views/Initializing';
@@ -17,7 +18,8 @@ class App extends Component {
 
   indexRedirect = () => {
     const { user = {} } = this.props;
-    const { isAuthenticated, defaultOrganizationId } = user;
+    const { isAuthenticated, data } = user;
+    const { defaultOrganizationId } = data;
 
     if (!isAuthenticated) return <Redirect to="/auth/login" />;
 
@@ -47,10 +49,26 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  user: PropTypes.shape({
+    data: PropTypes.oneOfType([
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        defaultOrganizationId: PropTypes.string
+      }),
+      PropTypes.shape({})
+    ]),
+    isAuthenticated: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    firstFetchPerformed: PropTypes.bool.isRequired
+  }).isRequired
+};
+
 const mapStateToProps = ({ user }) => ({
   user
 });
 
-export default withRouter(
-  connect(mapStateToProps, { retrieveAuthenticatedUser })(App)
-);
+export default connect(mapStateToProps, { retrieveAuthenticatedUser })(App);

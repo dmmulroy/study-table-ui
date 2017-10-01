@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import validator from 'validator';
 import axios from 'axios';
@@ -167,5 +168,9 @@ class SignUpFormContainer extends Component {
     );
   }
 }
+
+SignUpFormContainer.propTypes = {
+  history: PropTypes.object.isRequired
+};
 
 export default withRouter(SignUpFormContainer);

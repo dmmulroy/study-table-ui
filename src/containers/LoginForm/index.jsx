@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -39,8 +40,11 @@ class LoginFormContainer extends Component {
   }
 }
 
+LoginFormContainer.propTypes = {
+  isFetching: PropTypes.bool.isRequired
+};
+
 const mapStateToProps = ({ user }) => ({
-  user: user.data,
   isFetching: user.isFetching
 });
 

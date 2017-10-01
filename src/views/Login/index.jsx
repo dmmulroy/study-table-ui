@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -35,6 +36,14 @@ const LoginView = props =>
       </div>
     </section>
   );
+
+LoginView.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  firstFetchPerformed: PropTypes.bool.isRequired,
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired
+  }).isRequired
+};
 
 const mapStateToProps = ({ user }) => ({
   isAuthenticated: user.isAuthenticated,
