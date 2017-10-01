@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import { retrieveAuthenticatedUser } from 'redux/modules/user';
 import Initializing from 'views/Initializing';
@@ -44,6 +44,7 @@ class App extends Component {
         {!isAuthenticated && <Redirect to="/auth/login" />}
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/organizations" component={OrganizationManagement} />
+        <Redirect to="/" />
       </Switch>
     );
   }
@@ -71,4 +72,6 @@ const mapStateToProps = ({ user }) => ({
   user
 });
 
-export default connect(mapStateToProps, { retrieveAuthenticatedUser })(App);
+export default withRouter(
+  connect(mapStateToProps, { retrieveAuthenticatedUser })(App)
+);
