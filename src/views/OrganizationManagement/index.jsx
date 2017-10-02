@@ -1,8 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 
-const OrganizationManagement = ({ user }) => <div>Org Mgmt</div>;
+const CreateOrganizationForm = () => <div>Create</div>;
+const OrganizationList = () => <div>Org List</div>;
+
+const OrganizationManagement = ({ user, match }) => {
+  return (
+    <div className="container">
+      <Switch>
+        <Route exact path={match.path} component={OrganizationList} />
+        <Route path={`${match.path}/new`} component={CreateOrganizationForm} />
+        <Redirect to={match.path} />
+      </Switch>
+    </div>
+  );
+};
 
 OrganizationManagement.propTypes = {
   user: PropTypes.shape({
@@ -24,4 +38,4 @@ OrganizationManagement.propTypes = {
 
 const mapStateToProps = ({ user }) => ({ user });
 
-export default connect(mapStateToProps)(OrganizationManagement);
+export default withRouter(connect(mapStateToProps)(OrganizationManagement));
