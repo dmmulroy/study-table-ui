@@ -26,7 +26,7 @@ class App extends Component {
     return defaultOrganizationId ? (
       <Redirect to={`/dashboard/${defaultOrganizationId}`} />
     ) : (
-      <Redirect to="organizations" />
+      <Redirect to="organizations/new" />
     );
   };
 
