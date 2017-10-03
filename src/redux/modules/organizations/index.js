@@ -11,7 +11,7 @@ const REQUEST_USER_ORGANIZATIONS_FAILURE =
 // Reducer
 const initialState = {
   organizations: {},
-  isFetching
+  isFetching: false
 };
 
 export default (state = initialState, action = {}) => {
@@ -47,7 +47,7 @@ export const requestUserOrganizations = userId => async dispatch => {
 
     dispatch({
       type: REQUEST_USER_ORGANIZATIONS_SUCCESS,
-      payload: organization
+      payload: organizations
     });
   } catch (err) {
     dispatch({ type: REQUEST_USER_ORGANIZATIONS_FAILURE });
