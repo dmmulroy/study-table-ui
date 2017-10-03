@@ -7,7 +7,6 @@ import { requestUserOrganizations } from 'redux/modules/organizations';
 class OrganizationList extends Component {
   componentDidMount() {
     const { requestUserOrganizations, user } = this.props;
-    debugger;
     requestUserOrganizations(user.data.id);
   }
   render() {
