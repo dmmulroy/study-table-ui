@@ -33,9 +33,9 @@ class App extends Component {
   render() {
     const { user } = this.props;
     const { isAuthenticated, isFetching, firstFetchPerformed } = user;
-    const inititalizing = isFetching || !firstFetchPerformed;
+    const initializing = isFetching || !firstFetchPerformed;
 
-    return inititalizing ? (
+    return initializing ? (
       <Initializing />
     ) : (
       <Switch>
