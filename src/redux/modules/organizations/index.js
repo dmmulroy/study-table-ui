@@ -10,7 +10,7 @@ const REQUEST_USER_ORGANIZATIONS_FAILURE =
 
 // Reducer
 const initialState = {
-  organizations: {},
+  data: {},
   isFetching: false
 };
 
@@ -19,7 +19,7 @@ export default (state = initialState, action = {}) => {
     case REQUEST_USER_ORGANIZATIONS:
       return { ...state, isFetching: true };
     case REQUEST_USER_ORGANIZATIONS_SUCCESS:
-      return { ...state, ...action.payload, isFetching: true };
+      return { ...state, ...action.payload, isFetching: false };
     case REQUEST_USER_ORGANIZATIONS_FAILURE:
       return { ...state, isFetching: false };
     default:
@@ -43,11 +43,9 @@ export const requestUserOrganizations = userId => async dispatch => {
       url: `http://localhost:3001/api/user/${userId}/organizations`
     });
 
-    const { organizations } = data;
-
     dispatch({
       type: REQUEST_USER_ORGANIZATIONS_SUCCESS,
-      payload: organizations
+      payload: { data }
     });
   } catch (err) {
     dispatch({ type: REQUEST_USER_ORGANIZATIONS_FAILURE });

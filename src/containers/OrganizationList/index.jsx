@@ -10,12 +10,15 @@ class OrganizationList extends Component {
     requestUserOrganizations(user.data.id);
   }
   render() {
-    const organizations = [];
+    const { organizations } = this.props;
+    const { data } = organizations;
 
     return (
       <ul>
         <li>one item</li>
-        {organizations.map(organization => <li>organization.name</li>)}
+        {Object.values(organizations).map(organization => (
+          <li>organization.name</li>
+        ))}
       </ul>
     );
   }
