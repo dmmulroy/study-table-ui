@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-const NewOrganizationForm = props => (
-  <div>{JSON.stringify(props, null, 2)}</div>
-);
+import NewOrganizationForm from 'components/NewOrganizationForm';
 
 class NewOrganizationFormContainer extends Component {
   state = {
@@ -18,7 +16,7 @@ class NewOrganizationFormContainer extends Component {
 
   handleSubmit = () => {
     // const { createNewOrganization } = this.props;
-    //  const { name } = this.state;
+    // const { name } = this.state;
     // createNewOrganization(name);
   };
 
