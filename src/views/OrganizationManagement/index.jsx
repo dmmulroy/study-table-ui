@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 
 import OrganizationList from 'containers/OrganizationList';
-
-const CreateOrganizationForm = () => <div>Create</div>;
-// const OrganizationList = () => <div>Org List</div>;
+import NewOrganizationForm from 'containers/NewOrganizationForm';
 
 const OrganizationManagement = ({ user, match }) => {
   return (
@@ -18,7 +16,7 @@ const OrganizationManagement = ({ user, match }) => {
           component={OrganizationList}
           user={user}
         />
-        <Route path={`${match.path}/new`} component={CreateOrganizationForm} />
+        <Route path={`${match.path}/new`} component={NewOrganizationForm} />
         <Redirect to={match.path} />
       </Switch>
     </div>
