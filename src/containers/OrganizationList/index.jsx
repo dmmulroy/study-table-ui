@@ -9,6 +9,7 @@ class OrganizationList extends Component {
     const { requestUserOrganizations, user } = this.props;
     requestUserOrganizations(user.data.id);
   }
+
   render() {
     const { organizations } = this.props;
     const { data } = organizations;

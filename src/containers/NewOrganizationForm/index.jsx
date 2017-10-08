@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createOrganization } from 'redux/modules/organizations';
+import {
+  createOrganization,
+  CREATE_ORGANIZATION_SUCCESS
+} from 'redux/modules/organizations';
 import NewOrganizationForm from 'components/NewOrganizationForm';
 
 class NewOrganizationFormContainer extends Component {
@@ -15,16 +18,21 @@ class NewOrganizationFormContainer extends Component {
     this.setState(() => ({ [name]: value }));
   };
 
-  handleSubmit = () => {
-    const { createOrganization } = this.props;
+  handleSubmit = async () => {
+    const { createOrganization, history } = this.props;
     const { name } = this.state;
-    createOrganization(name);
+    const { type } = await createOrganization(name);
+
+    if (type === CREATE_ORGANIZATION_SUCCESS) history.push('/organizations');
   };
 
   render() {
+    const { isFetching } = this.props;
+    const { name } = this.state;
     return (
       <NewOrganizationForm
-        name={this.state.name}
+        name={name}
+        isFetching={isFetching}
         handleOnChange={this.handleOnChange}
         handleSubmit={this.handleSubmit}
       />
@@ -32,6 +40,10 @@ class NewOrganizationFormContainer extends Component {
   }
 }
 
-export default connect(() => ({}), { createOrganization })(
+const mapStateToProps = ({ organizations }) => ({
+  isFetching: organizations.isFetching
+});
+
+export default connect(mapStateToProps, { createOrganization })(
   NewOrganizationFormContainer
 );

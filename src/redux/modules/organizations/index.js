@@ -2,17 +2,18 @@ const axios = require('axios');
 const merge = require('lodash.merge');
 
 // Actions
-const REQUEST_USER_ORGANIZATIONS =
+export const REQUEST_USER_ORGANIZATIONS =
   'study-table/organizations/REQUEST_USER_ORGANIZATIONS';
-const REQUEST_USER_ORGANIZATIONS_SUCCESS =
+export const REQUEST_USER_ORGANIZATIONS_SUCCESS =
   'study-table/organizations/REQUEST_USER_ORGANIZATIONS_SUCCESS';
-const REQUEST_USER_ORGANIZATIONS_FAILURE =
+export const REQUEST_USER_ORGANIZATIONS_FAILURE =
   'study-table/organizations/REQUEST_USER_ORGANIZATIONS_FAILURE';
 
-const CREATE_ORGANIZATION = 'study-table/organizations/CREATE_ORGANIZATION';
-const CREATE_ORGANIZATION_SUCCESS =
+export const CREATE_ORGANIZATION =
+  'study-table/organizations/CREATE_ORGANIZATION';
+export const CREATE_ORGANIZATION_SUCCESS =
   'study-table/organizations/CREATE_ORGANIZATION_SUCCESS';
-const CREATE_ORGANIZATION_FAILURE =
+export const CREATE_ORGANIZATION_FAILURE =
   'study-table/organizations/CREATE_ORGANIZATION_FAILURE';
 
 // Reducer
@@ -76,8 +77,9 @@ export const createOrganization = name => async dispatch => {
       data: { name }
     });
 
-    dispatch({ type: CREATE_ORGANIZATION_SUCCESS, payload: { data } });
+    return dispatch({ type: CREATE_ORGANIZATION_SUCCESS, payload: { data } });
+    return true;
   } catch (err) {
-    dispatch({ type: CREATE_ORGANIZATION_FAILURE });
+    return dispatch({ type: CREATE_ORGANIZATION_FAILURE });
   }
 };
