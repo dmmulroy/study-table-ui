@@ -7,7 +7,7 @@ const NewOrganizationForm = ({
   handleSubmit,
   isFetching = false
 }) => (
-  <div>
+  <div className="box">
     <div className="field">
       <label className="label">Organization Name</label>
       <div className="control">

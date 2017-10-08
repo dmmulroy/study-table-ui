@@ -9,7 +9,7 @@ const LoginForm = ({
   handleSubmit,
   isFetching
 }) => (
-  <div>
+  <div className="box">
     <div className="field">
       <label className="label">Email</label>
       <div className="control has-icons-left">

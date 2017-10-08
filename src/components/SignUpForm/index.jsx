@@ -17,7 +17,7 @@ const SignUpForm = ({
   handleOnBlur,
   handleSubmit
 }) => (
-  <div>
+  <div className="box">
     <div className="field">
       <label className="label">First Name</label>
       <div className="control">
