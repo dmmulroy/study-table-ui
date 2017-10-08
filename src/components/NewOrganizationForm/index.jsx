@@ -9,7 +9,7 @@ const NewOrganizationForm = ({
 }) => (
   <div>
     <div className="field">
-      <label className="label">Organizatoin Name</label>
+      <label className="label">Organization Name</label>
       <div className="control">
         <input
           name="name"
@@ -36,7 +36,7 @@ const NewOrganizationForm = ({
       </div>
       <div className="control">
         <Link to="/organizations">
-          <button className="button is-medium is-link">Organizaitons</button>
+          <button className="button is-medium is-link">Organizations</button>
         </Link>
       </div>
     </div>
