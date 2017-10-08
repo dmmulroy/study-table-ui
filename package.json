@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "bulma": "^0.5.1",
+    "lodash.merge": "^4.6.0",
     "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

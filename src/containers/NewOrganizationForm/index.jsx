@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { createOrganization } from 'redux/modules/organizations';
 import NewOrganizationForm from 'components/NewOrganizationForm';
 
 class NewOrganizationFormContainer extends Component {
@@ -15,9 +16,9 @@ class NewOrganizationFormContainer extends Component {
   };
 
   handleSubmit = () => {
-    // const { createNewOrganization } = this.props;
-    // const { name } = this.state;
-    // createNewOrganization(name);
+    const { createOrganization } = this.props;
+    const { name } = this.state;
+    createOrganization(name);
   };
 
   render() {
@@ -31,4 +32,6 @@ class NewOrganizationFormContainer extends Component {
   }
 }
 
-export default NewOrganizationFormContainer;
+export default connect(() => ({}), { createOrganization })(
+  NewOrganizationFormContainer
+);
