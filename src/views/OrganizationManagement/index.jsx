@@ -8,18 +8,27 @@ import NewOrganizationForm from 'containers/NewOrganizationForm';
 
 const OrganizationManagement = ({ user, match }) => {
   return (
-    <div className="container">
-      <Switch>
-        <Route
-          exact
-          path={match.path}
-          component={OrganizationList}
-          user={user}
-        />
-        <Route path={`${match.path}/new`} component={NewOrganizationForm} />
-        <Redirect to={match.path} />
-      </Switch>
-    </div>
+    <section className="section">
+      <div className="container">
+        <div className="columns">
+          <div className="column is-half is-offset-one-quarter">
+            <Switch>
+              <Route
+                exact
+                path={match.path}
+                component={OrganizationList}
+                user={user}
+              />
+              <Route
+                path={`${match.path}/new`}
+                component={NewOrganizationForm}
+              />
+              <Redirect to={match.path} />
+            </Switch>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

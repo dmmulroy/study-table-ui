@@ -36,7 +36,9 @@ const NewOrganizationForm = ({
       </div>
       <div className="control">
         <Link to="/organizations">
-          <button className="button is-medium is-link">Organizations</button>
+          <button className="button is-medium is-link">
+            Your Organizations
+          </button>
         </Link>
       </div>
     </div>
