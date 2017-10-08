@@ -15,7 +15,9 @@ class OrganizationList extends Component {
 
     return (
       <ul>
-        {Object.values(data).map(organization => <li>organization.name</li>)}
+        {Object.values(data).map(organization => (
+          <li key={organization.id}>{organization.name}</li>
+        ))}
       </ul>
     );
   }
