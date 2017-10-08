@@ -63,7 +63,6 @@ export const requestUserOrganizations = userId => async dispatch => {
 
 export const createOrganization = name => async dispatch => {
   try {
-    debugger;
     dispatch({ type: CREATE_ORGANIZATION });
 
     const token = localStorage.getItem('token');
