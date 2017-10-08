@@ -141,7 +141,7 @@ class SignUpFormContainer extends Component {
       this.setState(() => ({ isFetching: true }));
 
       const { status } = await axios({
-        method: 'post',
+        method: 'put',
         url: 'http://localhost:3001/auth/sign-up',
         data: {
           firstName: this.state.firstName.value,
