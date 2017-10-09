@@ -78,7 +78,6 @@ export const createOrganization = name => async dispatch => {
     });
 
     return dispatch({ type: CREATE_ORGANIZATION_SUCCESS, payload: { data } });
-    return true;
   } catch (err) {
     return dispatch({ type: CREATE_ORGANIZATION_FAILURE });
   }
