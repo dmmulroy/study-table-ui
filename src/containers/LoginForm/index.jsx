@@ -7,13 +7,10 @@ import LoginForm from 'components/LoginForm';
 import { login } from 'redux/modules/user';
 
 class LoginFormContainer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: '',
-      password: ''
-    };
-  }
+  state = {
+    email: '',
+    password: ''
+  };
 
   handleOnChange = event => {
     const { name, value } = event.target;
