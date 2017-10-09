@@ -22,3 +22,5 @@ const OrganizationListItem = ({ organization }) => (
 OrganizationListItem.propTypes = {
   organization: PropTypes.object.isRequired
 };
+
+export default OrganizationListItem;
