@@ -51,7 +51,7 @@ export const login = (email, password) => async dispatch => {
 
     localStorage.setItem('token', token);
 
-    dispatch({ type: LOG_IN_SUCCESS, payload: { data: { user } } });
+    dispatch({ type: LOG_IN_SUCCESS, payload: { data: { ...user } } });
   } catch (err) {
     dispatch({ type: LOG_IN_FAILURE });
   }
